@@ -4,7 +4,7 @@ deploy:
   provider: heroku
   api_key:
     secure: CnDawQuurk5Ai9R8z4oSyH7che6LgyEvHCJbzc8dUwkb/rjDbKE9biyinqLjttfiMpjwkCe4w6ggE0+gExGGUkRQ1UfQ1OK5jpeQUy25Wt101vaRa8W3ZOYRxM4oZUkED54le2dKo4Zf55flz9WfnWUuJQ4ECdXxg2XPTcOHlEfSvwkxbrn8ZjgmFDweh3hr4pM//9caaEJbFuxb2kYnPKJ2MfDZ4U+Xx2x91VkF/NZ9dGkZfsnWjHbIF/aed6BIJHgSO5hy0OrGmkQ1TRYjV6owDLraFi/uzpPTn4sWRVN5d+fO2nz5hKThHbYamwINXLWbF4F+rVUtFmzcT7lyPUTFaNPaeXV9ibmLNJXfOFxucqG8iL4WrBFNuaBhMwAWN5iKqLoaj8OHptd0PDDwU9uJ6PGy3qQDnkqeDdWGBien6HUPn6EMgQP9/d4b90o3/kyYJXp3bWrcwv+XZ9o8Anuo8fykDkptZ8dcZHH63E8IzJ8p9tHBztQV93l1LNoNLLQpKFrycUzwf/EvnwtoPvdESppFIXWhj5jrLP41WRJyi1tWZwoxFEIazFHqr1IRpdmjiDgL8b5UtjabZea5jpoN3oQ8D9P/CHW784yi+Lc4Ukecb3KlSVtgx/2tNcT2/ouoKILBiPzAS2i6ilcQOIDXYsZ2FLL4HLwFjeslZgw=
-  app: https://stormy-reaches-29948.herokuapp.com/
+  app: stormy-reaches-29948 
   on:
     repo: dxtrlws/movie-app
 
