@@ -9,6 +9,11 @@ const testController = require('./controllers/testController');
 //test route
 routes.get('/', testController.get);
 
+//movie routes
+
+
+//user routes
+
 
 
 //export route module
