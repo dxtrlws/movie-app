@@ -9,6 +9,7 @@
     <header>
 
     </header>
+    <h1>Movie Watch List</h1>
     <div class="row">
         <div class="col-md-6">
             <h3>Discover Movies</h3>
@@ -20,6 +21,67 @@
             <p>Try it out by using the demo account listed below:</p>
             <p><b>Username:</b> test</p>
             <p><b>Password:</b>movies</p>
+        </div>
+    </div>
+</div>
+
+
+<!--Login modal-->
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Movie Watch List</h4>
+            </div>
+            <div class="modal-body">
+               <form method="post" action="/login">
+                   <div class="form-group">
+                       <label for="user-name" class="control-label">Username</label>
+                       <input type="text" class="form-control" name="username" id="username" required>
+                   </div>
+                   <div class="form-group">
+                       <label for="password" class="control-label">Password</label>
+                       <input type="text" class="form-control" name="password" id="password" required>
+                   </div>
+               </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Signup modal-->
+<div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Movie Watch List</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/signup">
+                    <div class="form-group">
+                        <label for="user-name" class="control-label">Username</label>
+                        <input type="text" class="form-control" name="username" id="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="control-label">Password</label>
+                        <input type="text" class="form-control" name="password" id="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password" class="control-label">Confirm Password</label>
+                        <input type="text" class="form-control" name="password" id="confirm-password" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </div>
     </div>
 </div>

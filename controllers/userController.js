@@ -1,30 +1,25 @@
 /**
  * Created by Admin on 4/19/2017.
  */
-const userModel= require('./../models/index');
-userController = {};
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const jasonParser = bodyParser.json();
+const User = require('./../models/users');
 
-userController.create = (req, res) => {
 
-    const {username, password} = req.body;
-    //validation
+router.get('/users', (req, res) => {
+   User.find({})
+       .then(user => res.json({
+           username: user.name,
+           password: user.password
+       }))
 
-    const user = new db.User({
-        username,
-        password
-    });
-    user.save()
-        .then((newUser) => {
-            res.status(200).json({
-                success: true,
-                data: newUser
-            });
-        })
-        .catch((err) => {
-            res.status(500).json({
-                message: err
-            });
-        });
-}
+});
 
-module.exports = userController;
+router.post('/signup', jasonParser,(req, res) => {
+    const user = User.create(req.body.username, req.body.password);
+    res.status(201).json(user);
+});
+
+module.exports = router;

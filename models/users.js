@@ -14,18 +14,18 @@ const userSchema = mongoose.Schema({
     }
 });
 
-userSchema.methods.validatePassword = function(password) {
-    return bcrypt
-        .compare(password, this.password)
-        .then(isValid => isValid);
-}
+// userSchema.methods.validatePassword = function(password) {
+//     return bcrypt
+//         .compare(password, this.password)
+//         .then(isValid => isValid);
+// }
+//
+// userSchema.statics.hashPassword = function() {
+//     return bcrypt
+//         .hash(password, 10)
+//         .then(hash => hash);
+// }
 
-userSchema.statics.hashPassword = function() {
-    return bcrypt
-        .hash(password, 10)
-        .then(hash => hash);
-}
-
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('user', userSchema);
 
 module.exports = User;

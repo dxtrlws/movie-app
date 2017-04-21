@@ -8,5 +8,9 @@ router.get('/', (req, res) => {
    res.render('index', {title: 'Movie Watch List'});
 });
 
+// router.get('*', (req, res) => {
+//     res.render('index', {title: 'Movie Watch List'});
+// });
+
 
 module.exports =router;

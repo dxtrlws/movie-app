@@ -5,16 +5,17 @@ const express = require('express');
 const router = express.Router();
 //controller imports
 const homeController = require('./controllers/homeController');
+const userController = require('./controllers/userController');
 
 
 //test route
-router.use('/', homeController);
+router.get('/', homeController);
 
 //movie routes
 
 
 //user routes
-
+router.get('/users', userController);
 
 
 //export route module

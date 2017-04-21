@@ -2,6 +2,8 @@ const express = require('express');
 const {PORT, DATABASE_URL} = require('./config');
 const app = express();
 const routes = require('./routes');
+const mongoose = require('mongoose');
+mongoose.connect(DATABASE_URL);
 //Set view engine
 app.set('view engine', 'ejs');
 //Use static files
