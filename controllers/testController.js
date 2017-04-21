@@ -4,7 +4,9 @@
 testController = {};
 
 testController.get = (req, res) => {
-    res.render('index');
+    res.render('index',  {
+        title: 'Movie Watch List'
+    });
 };
 
 module.exports = testController;

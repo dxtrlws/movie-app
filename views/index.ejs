@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="stylesheet">
+    <% include ./partials/head %>
 </head>
 
 <body>
-    <h1>Built with Node</h1>
+<div class="container">
+    <header>
+        <% include ./partials/header%>
+    </header>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Discover Movies</h3>
+            <p>Have a hard time keeping track of the movies you want to watch? You remember hearing about a movie, but can't remember the name of it? We';re here to help with that.</p>
+        </div>
+        <div class="col-md-6">
+            <h3>Add Them to Your Vault</h3>
+            <p>Find a move and just add the movie you want to your list and keep with you wherever you go. </p>
+            <p>Try it out by using the demo account listed below:</p>
+            <p><b>Username:</b></p>
+            <p><b>Password:</b></p>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-3.2.1.js"></script>
+<script src="js/bootstrap.js"></script>
 </body>
 
 </html>
