@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-
+mongoose.Promise = global.Promise;
 //user schema
 const userSchema = mongoose.Schema({
     username: {
@@ -28,4 +28,4 @@ userSchema.statics.hashPassword = function() {
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = {User};
+module.exports = User;

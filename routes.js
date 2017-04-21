@@ -2,12 +2,13 @@
  * Created by Admin on 4/19/2017.
  */
 const express = require('express');
-const routes = express.Router();
+const router = express.Router();
 //controller imports
-const testController = require('./controllers/testController');
+const homeController = require('./controllers/homeController');
+
 
 //test route
-routes.get('/', testController.get);
+router.use('/', homeController);
 
 //movie routes
 
@@ -17,4 +18,4 @@ routes.get('/', testController.get);
 
 
 //export route module
-module.exports = routes;
+module.exports = router;
