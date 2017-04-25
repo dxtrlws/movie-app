@@ -33,10 +33,11 @@ function movieDiscoveryDisplay(data) {
        var poster = result.poster_path;
        var releaseDate = result.release_date.slice(0, 4);
         resultElement +=
-            '<div class=col-sm-2>' +
-            '<img class="img-responsive poster-image" src="http://image.tmdb.org/t/p/w185'+poster + '">' +'<br>' +
+            '<div class=col-md-2 >' +
+            '<img class="img-responsive poster-image" src="http://image.tmdb.org/t/p/w342'+poster + '">' +'<br>' +
             '<b>' + title + '</b>' + '<br>' +
-            'Released ' + releaseDate +
+            'Released ' + releaseDate + '<br>' +
+                '<i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer      <i class="fa fa-exclamation-circle" aria-hidden="true"></i>Details' +
             '</div>';
         return key < 5;
     });

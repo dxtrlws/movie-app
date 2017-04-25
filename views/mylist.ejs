@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ./partials/head.ejs %>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <% include ./partials/header.ejs %>
+        </header>
+        <h1>Movie Watch List</h1>
+        <form>
+            <div class="form-group">
+                <label for="search" class="control-label">Movie search</label>
+                <input type="text" class="form-control" name="movie-search" id="movie-search">
+            </div>
+            <button type="submit" id="search" class="btn btn-primary">Submit</button>
+        </form>
+
+        <h1>My Movie List</h1>
+    </div>

@@ -1,107 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <% include ./partials/head.ejs %>
 </head>
 
 <body>
-<div class="container">
-    <header>
+    <div class="container">
+        <header>
+            <% include ./partials/header.ejs %>
+        </header>
+        <h1>Movie Watch List</h1>
+        <form>
+            <div class="form-group">
+                <label for="search" class="control-label">Movie search</label>
+                <input type="text" class="form-control" name="movie-search" id="movie-search">
+            </div>
+            <button type="submit" id="search" class="btn btn-primary">Submit</button>
+        </form>
 
-    </header>
-    <h1>Movie Watch List</h1>
-    <form>
-    <div class="form-group">
-        <label for="search" class="control-label">Movie search</label>
-        <input type="text" class="form-control" name="movie-search" id="movie-search">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Discover Movies</h3>
+                <p>Have a hard time keeping track of the movies you want to watch? You remember hearing about a movie, but can't remember the name of it? We';re here to help with that.</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Add Them to Your Vault</h3>
+                <p>Find a move and just add the movie you want to your list and keep with you wherever you go. </p>
+                <p>Try it out by using the demo account listed below:</p>
+                <p><b>Username:</b> test</p>
+                <p><b>Password:</b>movies</p>
+            </div>
+        </div>
+        <section>
+            <h3>Now Playing</h3>
+            <div class="row" id="nowPlaying">
+
+            </div>
+        </section>
     </div>
-        <button type="submit" id="search" class="btn btn-primary">Submit</button>
-    </form>
-
-    <div class="row">
-        <div class="col-md-6">
-            <h3>Discover Movies</h3>
-            <p>Have a hard time keeping track of the movies you want to watch? You remember hearing about a movie, but can't remember the name of it? We';re here to help with that.</p>
-        </div>
-        <div class="col-md-6">
-            <h3>Add Them to Your Vault</h3>
-            <p>Find a move and just add the movie you want to your list and keep with you wherever you go. </p>
-            <p>Try it out by using the demo account listed below:</p>
-            <p><b>Username:</b> test</p>
-            <p><b>Password:</b>movies</p>
-        </div>
-    </div>
-    <section>
-        <h3>Now Playing</h3>
-        <div class="row" id="nowPlaying">
-
-        </div>
-    </section>
-</div>  <!-- end container -->
+    <!-- end container -->
 
 
-<!--Login modal-->
-<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Movie Watch List</h4>
-            </div>
-            <div class="modal-body">
-               <form method="post" action="/login">
-                   <div class="form-group">
-                       <label for="user-name" class="control-label">Username</label>
-                       <input type="text" class="form-control" name="username" id="username" required>
-                   </div>
-                   <div class="form-group">
-                       <label for="password" class="control-label">Password</label>
-                       <input type="text" class="form-control" name="password" id="password" required>
-                   </div>
-               </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
-    </div>
-</div>
+    <!--Login modal-->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Movie Watch List</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/login">
+                        <div class="form-group">
+                            <label for="user-name" class="control-label">Username</label>
+                            <input type="text" class="form-control" name="username" id="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="control-label">Password</label>
+                            <input type="text" class="form-control" name="password" id="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-<!--Signup modal-->
-<div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Movie Watch List</h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="/signup">
-                    <div class="form-group">
-                        <label for="user-name" class="control-label">Username</label>
-                        <input type="text" class="form-control" name="username" id="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="control-label">Password</label>
-                        <input type="text" class="form-control" name="password" id="password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirm-password" class="control-label">Confirm Password</label>
-                        <input type="text" class="form-control" name="password" id="confirm-password" required>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script src="js/jquery-3.2.1.js"></script>
-<script src="js/app.js"></script>
-<script src="js/bootstrap.js"></script>
+
+    <!--Signup modal-->
+    <div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Movie Watch List</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/signup">
+                        <div class="form-group">
+                            <label for="user-name" class="control-label">Username</label>
+                            <input type="text" class="form-control" name="username" id="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="control-label">Password</label>
+                            <input type="text" class="form-control" name="password" id="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/bootstrap.js"></script>
 </body>
 
 </html>

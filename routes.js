@@ -16,6 +16,8 @@ router.get('/', homeController);
 
 //user routes
 router.get('/users', userController);
+router.post('/signup', userController);
+router.post('/login', userController);
 
 
 //export route module
