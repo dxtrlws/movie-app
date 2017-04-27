@@ -1,5 +1,8 @@
 .poster-image {
-    height: 274px;
-    max-height: 274px;
+    /*height: 274px;
+    max-height: 274px;*/
+}
 
+nav {
+    margin-top: 20px;
 }

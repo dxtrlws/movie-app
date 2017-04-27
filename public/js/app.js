@@ -4,17 +4,17 @@
 'use strict'
 var apiKey = 'd488882c9d53c805e558e55986d4dd20';
 var movieSearchUrl = 'https://api.themoviedb.org/3/search/movie';
-var discoverMovieUrl ='https://api.themoviedb.org/3/discover/movie';
+var discoverMovieUrl = 'https://api.themoviedb.org/3/discover/movie';
 
 //Discover movies
 function discoverMovies(movieDiscoverDisplay) {
     //current date
     var myDate = new Date();
-    var endDate = (myDate.getFullYear() + '-' + myDate.getMonth() + '-' + myDate.getDay() );
+    var endDate = (myDate.getFullYear() + '-' + myDate.getMonth() + '-' + myDate.getDay());
 
     var d = new Date();
     d.setDate(d.getDate() - 7);
-    var startDate = (d.getFullYear() + '-' + d.getMonth() + '-' + d.getDay() );
+    var startDate = (d.getFullYear() + '-' + d.getMonth() + '-' + d.getDay());
 
     console.log(endDate);
     console.log(startDate);
@@ -26,18 +26,17 @@ function discoverMovies(movieDiscoverDisplay) {
 
 function movieDiscoveryDisplay(data) {
 
-    debugger;
     var resultElement = '';
     $.each(data.results, function(key, result) {
-       var title = result.title;
-       var poster = result.poster_path;
-       var releaseDate = result.release_date.slice(0, 4);
+        var title = result.title;
+        var poster = result.poster_path;
+        var releaseDate = result.release_date.slice(0, 4);
         resultElement +=
             '<div class=col-md-2 >' +
-            '<img class="img-responsive poster-image" src="http://image.tmdb.org/t/p/w342'+poster + '">' +'<br>' +
+            '<img class="img-responsive poster-image" src="http://image.tmdb.org/t/p/w342' + poster + '">' + '<br>' +
             '<b>' + title + '</b>' + '<br>' +
             'Released ' + releaseDate + '<br>' +
-                '<i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer      <i class="fa fa-exclamation-circle" aria-hidden="true"></i>Details' +
+            '<i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer      <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Details' +
             '</div>';
         return key < 5;
     });
@@ -63,7 +62,7 @@ function displaySearchResults(data) {
     console.log(data);
 }
 
-function searchForm () {
+function searchForm() {
     $('#search').click(function(e) {
         e.preventDefault();
         var query = $('#movie-search').val();

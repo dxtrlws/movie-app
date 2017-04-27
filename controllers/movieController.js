@@ -1,3 +1,8 @@
-/**
- * Created by Admin on 4/19/2017.
- */
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const jasonParser = bodyParser.json();
+const User = require('./../models/users');
+
+
+module.exports = router;

@@ -6,18 +6,21 @@ const router = express.Router();
 //controller imports
 const homeController = require('./controllers/homeController');
 const userController = require('./controllers/userController');
+const movieController = require('./controllers/movieController');
 
-
-//test route
+//home routes
 router.get('/', homeController);
+router.get('/login', homeController);
+router.get('/signup', homeController);
+router.get('/logout', homeController);
 
 //movie routes
 
 
 //user routes
-router.get('/users', userController);
 router.post('/signup', userController);
 router.post('/login', userController);
+router.get('/mylist', userController);
 
 
 //export route module

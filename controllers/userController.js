@@ -24,23 +24,47 @@ router.post('/signup', (req, res) => {
         username: req.body.username,
         password: req.body.password
     });
+
     res.render('mylist', { title: 'My Movie List' });
+
 });
 
 //Users to login
 router.post('/login', (req, res) => {
-    User.findOne({ username: req.body.username }), (err, user) => {
+    User.findOne({ username: req.body.username }, function(err, user) {
         if (!user) {
-            res.render('index', { err: 'Invalid username or password' });
+            res.render('index', { title: 'no account found' });
         } else {
             if (req.body.password === user.password) {
-                res.render('mylist');
+                req.session.user = user;
+                res.redirect('/mylist');
+
             } else {
-                res.render('index', { err: 'Invalid username or password' });
+                res.render('index', { title: 'My Movie List' });
             }
         }
-    };
+    });
+
 
 });
+
+router.get('/mylist', (req, res) => {
+
+    if (req.session && req.session.user) {
+        User.findOne({ username: req.session.username }, function(err, user) {
+            console.log({ username: req.session.user });
+            if (!user) {
+                req.session.reset();
+                res.redirect('/');
+            } else {
+                res.locals.user = user;
+                res.render('mylist', { title: 'My Movie List' });
+            }
+        });
+    } else {
+        res.redirect('/');
+    }
+});
+
 
 module.exports = router;

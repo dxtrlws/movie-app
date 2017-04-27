@@ -24,6 +24,7 @@ app.use(sessions({
     duration: 30 * 60 * 1000,
     activeDuration: 5 * 60 * 1000,
 }));
+
 //Use routes
 app.use('/', routes);
 
@@ -31,7 +32,7 @@ app.use('/', routes);
 
 
 
-
+//server
 app.listen(PORT, () => {
     console.log(`Yo dawg, your app is listening on port ${PORT}`)
 });
