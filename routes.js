@@ -15,7 +15,7 @@ router.get('/signup', homeController);
 router.get('/logout', homeController);
 
 //movie routes
-
+router.get('/mylist', movieController);
 
 //user routes
 router.post('/signup', userController);

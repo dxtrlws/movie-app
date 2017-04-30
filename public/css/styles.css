@@ -3,6 +3,10 @@
     max-height: 274px;*/
 }
 
+body {
+    background-color: #F4F4F4;
+}
+
 nav {
     margin-top: 20px;
 }
