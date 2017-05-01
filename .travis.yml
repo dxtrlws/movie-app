@@ -7,4 +7,5 @@ deploy:
   app: stormy-reaches-29948 
   on:
     repo: dxtrlws/movie-app
+  services: mongodb
 
