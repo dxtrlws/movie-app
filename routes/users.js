@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const User = require('./../models/');
+const User = require('./../models/user');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 // Register
 router.get('/register', (req, res) => {
-    res.render('register');
+    res.render('register', { title: 'Movie Watch - Register' });
 });
 
 //Login
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login', { title: 'Movie Watch - Login' });
 });
 
 // Register User
@@ -84,12 +84,9 @@ router.post('/login',
     });
 
 router.get('/logout', (req, res) => {
-    req.session.destroy((err) => {
-        req.flash('success_msg', 'You are logged out');
-        res.redirect('/users/login');
-    })
-
-
+    req.logOut();
+    req.flash('success_msg', 'You are logged out');
+    res.redirect('/users/login');
 });
 
 module.exports = router;

@@ -1,12 +1,87 @@
-.poster-image {
-    /*height: 274px;
-    max-height: 274px;*/
-}
-
 body {
     background-color: #F4F4F4;
 }
 
 nav {
     margin-top: 20px;
+}
+
+.item img {
+    max-height: 500px !important;
+}
+
+
+/*alerts*/
+
+.alert li {
+    margin-left: 10px;
+}
+
+
+/*carousel*/
+
+.carousel-caption {
+    text-align: left;
+    margin-bottom: 100px;
+}
+
+.carousel-caption a {
+    color: #ffffff;
+}
+
+.carousel-caption a span {
+    margin-bottom: 5px;
+}
+
+.carousel-caption a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.fa-play-circle {
+    color: #FE7900;
+}
+
+.carousel-caption .fa {
+    color: #FE7900;
+    margin-top: 15px;
+}
+
+.carousel-inner .item {
+    width: 100%;
+    height: 500px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.movie-img1 {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/images/wonderWoman-slider1.jpg), no-repeat center center fixed;
+}
+
+.movie-img2 {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/images/mummy-slider3.jpg) no-repeat center center fixed;
+}
+
+.movie-img3 {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/images/pirates-slider2.jpg) no-repeat center center fixed;
+}
+
+.movie-img4 {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/images/guard-slider4.jpg) no-repeat center center fixed;
+}
+
+
+/*Now playing*/
+
+.playing {
+    margin-bottom: 20px;
+}
+
+
+/*footer*/
+
+footer hr {
+    border-top: 1px solid #8c8b8b;
 }

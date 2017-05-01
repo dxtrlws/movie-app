@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Movie App</title>
+    <title>{{title}}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/css/bootstrap.css" rel="stylesheet">
@@ -34,7 +34,9 @@
 
             <ul class="nav navbar-nav navbar-right">
                 {{#if user}}
-                <li><a href="/logout">Log Out</a></li>
+                <li><a href="/mymovies">My Movies</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/users/logout">Log Out</a></li>
                 {{else}}
                 <li><a href="/users/login">Login <span class="sr-only">(current)</span></a></li>
                 <li><a href="/users/register">Register</a></li>
@@ -62,9 +64,15 @@
             <div class="alert alert-danger">{{error}}</div>
           {{/if}}
     </div>
-    {{{body}}}
 </div>
+{{{body}}}
 
+<footer>
+<div class="container">
+    <hr>
+    <p>&copy 2017 Movie Watch List</p>
+</div>
+</footer>
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/app.js"></script>
     <script src="js/bootstrap.js"></script>
