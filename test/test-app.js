@@ -6,11 +6,11 @@ chai.use(chaiHttp);
 
 
 describe('Movie app', function() {
-    it('Should return status of 200 on GET', function(){
-       return chai.request(server)
-       .get('/')
-       .then(function(res){
-           res.should.have.status(200);
-       });
+    it('Should return status of 200 on GET', function() {
+        return chai.request(server)
+            .get('/users/login')
+            .then(function(res) {
+                res.should.have.status(200);
+            });
     });
 });

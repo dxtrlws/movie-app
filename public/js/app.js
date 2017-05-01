@@ -10,18 +10,23 @@ var discoverMovieUrl = 'https://api.themoviedb.org/3/discover/movie';
 function discoverMovies(movieDiscoverDisplay) {
     //current date
     var myDate = new Date();
-    var endDate = (myDate.getFullYear() + '-' + myDate.getMonth() + '-' + myDate.getDay());
+    var eYear = myDate.getFullYear();
+    var eMonth = myDate.getMonth() + 1;
+    var eDay = myDate.getDay();
+    var endDate = (eYear + '-' + eMonth + '-' + eDay);
 
-    var d = new Date();
-    d.setDate(d.getDate() - 7);
-    var startDate = (d.getFullYear() + '-' + d.getMonth() + '-' + d.getDay());
-
-    console.log(endDate);
-    console.log(startDate);
+    //get day 7 days prior
+    var e = new Date(new Date().setDate(new Date().getDate() - 7))
+    var sYear = e.getFullYear();
+    var sMonth = e.getMonth() + 1;
+    var sDay = e.getDay();
+    var startDate = (sYear + '-' + sMonth + '-' + sDay);
+    //set new url 
+    discoverMovieUrl = 'https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=' + startDate + '&primary_release_date.lte=' + endDate;
     var settings = {
         api_key: apiKey
     };
-    $.getJSON('https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=2017-04-23&primary_release_date.lte=2017-04-30&api_key=d488882c9d53c805e558e55986d4dd20', movieDiscoverDisplay);
+    $.getJSON(discoverMovieUrl, settings, movieDiscoverDisplay);
 }
 
 function movieDiscoveryDisplay(data) {

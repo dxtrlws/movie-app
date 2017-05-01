@@ -10,9 +10,10 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
+const { PORT, DATABASE_URL } = require('./config');
 
-mongoose.connect('mongodb://localhost/movie-app');
-const db = mongoose.connection;
+mongoose.connect(DATABASE_URL);
+// const db = mongoose.connection;
 
 // Init App
 const app = express();
@@ -82,10 +83,10 @@ app.use('/mymovies', movies);
 
 
 // Set Port
-app.set('port', (process.env.PORT || 8080));
+// app.set('port', (process.env.PORT || 8080));
 
-app.listen(app.get('port'), () => {
-    console.log('Server started on port ' + app.get('port'));
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
 });
 
-module.exports = { app };
+module.exports = app;
