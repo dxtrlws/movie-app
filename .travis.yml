@@ -8,5 +8,5 @@ deploy:
   on:
     repo: dxtrlws/movie-app
   services: 
-    - mongodb
+    – mongodb
 
