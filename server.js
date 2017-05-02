@@ -10,9 +10,10 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 const { PORT, DATABASE_URL } = require('./config');
 
-mongoose.connect(DATABASE_URL);
+// mongoose.connect(DATABASE_URL);
 // const db = mongoose.connection;
 
 // Init App
@@ -82,11 +83,49 @@ app.use('/users', users);
 app.use('/mymovies', movies);
 
 
-// Set Port
-// app.set('port', (process.env.PORT || 8080));
+let server;
 
-app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
-});
+// Connects to database and starts server
+function runServer(databaseUrl = DATABASE_URL, port = PORT) {
 
+    return new Promise((resolve, reject) => {
+        mongoose.connect(databaseUrl, err => {
+            if (err) {
+                return reject(err);
+            }
+            server = app.listen(port, () => {
+                    console.log(`Your app is listening on port ${port}`);
+                    resolve();
+                })
+                .on('error', err => {
+                    mongoose.disconnect();
+                    reject(err);
+                });
+        });
+    });
+}
+
+//Closes ther server and disconnects from the database
+function closeServer() {
+    return mongoose.disconnect().then(() => {
+        return new Promise((resolve, reject) => {
+            console.log('Closing server');
+            server.close(err => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve();
+            });
+        });
+    });
+}
+
+// allows to start server by running npm start
+
+if (require.main === module) {
+    runServer().catch(err => console.error(err));
+};
+
+
+module.exports = { app, runServer, closeServer };
 module.exports = app;
