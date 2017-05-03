@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const jasonParser = bodyParser.json();
 const exphbs = require('express-handlebars');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
@@ -43,9 +44,16 @@ app.use(session({
     resave: true
 }));
 
+
 // Passport init
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session({
+    secret: 'cookie_secret',
+    name: 'cookie_name',
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+}));
 
 // Express Validator
 app.use(expressValidator({
@@ -73,14 +81,9 @@ app.use(function(req, res, next) {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
-    res.locals.user = req.user || null;
+    // res.locals.user = req.user || null;
     next();
 });
-
-// Set Routes
-app.use('/', routes);
-app.use('/users', users);
-app.use('/mymovies', movies);
 
 
 let server;
@@ -125,6 +128,12 @@ function closeServer() {
 if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
+
+
+// Set Routes
+app.use('/', routes);
+app.use('/users', users);
+app.use('/mymovies', movies);
 
 
 module.exports = { runServer, closeServer };

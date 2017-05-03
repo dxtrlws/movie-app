@@ -80,6 +80,8 @@ passport.deserializeUser(function(id, done) {
 router.post('/login',
     passport.authenticate('local', { successRedirect: '/', failureRedirect: '/users/login', failureFlash: true }),
     function(req, res) {
+        req.session.user = req.user;
+        console.log(req.user);
         res.redirect('/');
     });
 

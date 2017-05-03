@@ -8,7 +8,7 @@ const movieSchema = mongoose.Schema({
     releaseDate: Date,
     _creator: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users'
+        ref: 'users'
     }
 
 });
