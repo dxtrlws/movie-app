@@ -82,7 +82,7 @@ router.post('/login',
     function(req, res) {
         req.session.user = req.user;
         console.log(req.user);
-        res.redirect('/');
+        res.render('/');
     });
 
 router.get('/logout', (req, res) => {

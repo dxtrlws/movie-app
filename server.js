@@ -47,13 +47,7 @@ app.use(session({
 
 // Passport init
 app.use(passport.initialize());
-app.use(passport.session({
-    secret: 'cookie_secret',
-    name: 'cookie_name',
-    proxy: true,
-    resave: true,
-    saveUninitialized: true
-}));
+app.use(passport.session());
 
 // Express Validator
 app.use(expressValidator({
@@ -81,7 +75,7 @@ app.use(function(req, res, next) {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
-    // res.locals.user = req.user || null;
+    res.locals.user = req.user || null;
     next();
 });
 

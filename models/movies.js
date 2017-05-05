@@ -6,6 +6,8 @@ const movieSchema = mongoose.Schema({
     title: String,
     imageURL: String,
     releaseDate: Date,
+    overview: String,
+    rating: String,
     _creator: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'

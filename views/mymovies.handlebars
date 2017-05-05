@@ -1,4 +1,10 @@
 <div class="container">
 <h1>My Movies</h1>
-
+{{#each movies}}
+<section>
+     {{title}}
+     {{else}}
+     <p>Add some movies to your list by using the search</p>
+</section>
+    {{/each}}
 </div>

@@ -4,29 +4,19 @@
 'use strict'
 var apiKey = 'd488882c9d53c805e558e55986d4dd20';
 var movieSearchUrl = 'https://api.themoviedb.org/3/search/movie';
-var discoverMovieUrl = 'https://api.themoviedb.org/3/discover/movie';
+var nowPlaying = 'https://api.themoviedb.org/3/movie/now_playing';
+var upcoming = 'https://api.themoviedb.org/3/movie/upcoming';
 
-//Discover movies
-function discoverMovies(movieDiscoverDisplay) {
-    //current date
-    var myDate = new Date();
-    var eYear = myDate.getFullYear();
-    var eMonth = myDate.getMonth() + 1;
-    var eDay = myDate.getDay();
-    var endDate = (eYear + '-' + eMonth + '-' + eDay);
-
-    //get day 7 days prior
-    var e = new Date(new Date().setDate(new Date().getDate() - 7))
-    var sYear = e.getFullYear();
-    var sMonth = e.getMonth() + 1;
-    var sDay = e.getDay();
-    var startDate = (sYear + '-' + sMonth + '-' + sDay);
-    //set new url 
-    discoverMovieUrl = 'https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=' + startDate + '&primary_release_date.lte=' + endDate;
+//Get movies
+function getMovies(movieDiscoveryDisplay, upcomingMovieDisplay) {
     var settings = {
-        api_key: apiKey
+        api_key: apiKey,
+        region: 'US'
     };
-    $.getJSON(discoverMovieUrl, settings, movieDiscoverDisplay);
+
+    $.getJSON(nowPlaying, settings, movieDiscoveryDisplay);
+    $.getJSON(upcoming, settings, upcomingMovieDisplay);
+
 }
 
 function movieDiscoveryDisplay(data) {
@@ -35,12 +25,12 @@ function movieDiscoveryDisplay(data) {
     $.each(data.results, function(key, result) {
         var title = result.title;
         var poster = result.poster_path;
-        var releaseDate = result.release_date.slice(0, 4);
+        var releaseDate = moment(result.release_date).format('LL');
         resultElement +=
             '<div class="col-md-2 playing">' +
             '<img class="img-responsive poster-image" src="http://image.tmdb.org/t/p/w342' + poster + '">' + '<br>' +
             '<b>' + title + '</b>' + '<br>' +
-            'Released ' + releaseDate + '<br>' +
+            'Release: ' + releaseDate + '<br>' +
             '<i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer      <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Details' +
             '</div>';
         return key < 5;
@@ -48,6 +38,26 @@ function movieDiscoveryDisplay(data) {
 
     $('#nowPlaying').html(resultElement);
 }
+// Display 
+function upcomingMovieDisplay(data) {
+    var resultElement = '';
+    $.each(data.results, function(key, result) {
+        var title = result.title;
+        var poster = result.poster_path;
+        var releaseDate = moment(result.release_date).format('LL');
+        resultElement +=
+            '<div class="col-md-2 playing">' +
+            '<img class="img-responsive poster-image" src="http://image.tmdb.org/t/p/w342' + poster + '">' + '<br>' +
+            '<b>' + title + '</b>' + '<br>' +
+            'Release: ' + releaseDate + '<br>' +
+            '<i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer      <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Details' +
+            '</div>';
+        return key < 5;
+    });
+
+    $('#upcoming').html(resultElement);
+}
+
 
 //Movie Search
 function getMovie(query, callback) {
@@ -93,5 +103,5 @@ function searchForm() {
 
 $(function() {
     searchForm();
-    discoverMovies(movieDiscoveryDisplay);
+    getMovies(movieDiscoveryDisplay, upcomingMovieDisplay);
 });

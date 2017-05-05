@@ -5,10 +5,11 @@ const router = express.Router();
 // Get homepage
 router.get('/', (req, res) => {
     res.render('index', { title: 'Movie Watch List' });
+    // console.log({ username: req.user.username });
 });
 
 // Get search page
-router.get('/search', (req, res) => {
+router.get('/search', ensureAuthenticated, (req, res) => {
     res.render('search', { title: 'Movie Watch - Search' });
 });
 
