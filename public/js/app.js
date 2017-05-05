@@ -75,15 +75,38 @@ function getMovie(query, callback) {
 
 function displayMovieResults(data) {
     var resultElement = "";
-    $.each(data.results, function(key, result) {
+    if (data.results.length < 0) {
+        resultElement = '<p>There are no movies that matched your query.</p>';
+    }else {
+        $.each(data.results, function(key, result) {
         var title = result.title;
         var poster = result.poster_path;
         var releaseDate = result.release_date;
         var voteAverage = result.vote_average;
         var overview = result.overview;
         resultElement +=
-            '<p>' + title + '</p>';
+        '<div class="card">' +
+        '<div class="row">' +
+            '<div class="col-sm-3">' +
+                '<img class="img-responsive" src="http://image.tmdb.org/t/p/w342' + poster + '">' +
+            '</div>'+
+            '<div class="col-sm-9">' +
+                '<div class="movieDetails">' +
+                '<p><b>' + title + '</b></p>' +
+                '<p><i class="fa fa-calendar" aria-hidden="true"></i> ' + releaseDate + '</p>' +
+                '<p>' + overview + '</p>' +
+                '<div class="addMovie">' +
+                    '<hr>'+
+                    '<button class="btn btn-default" type="submit">Add Movie</button>' +
+                '</div>' +
+                '</div>' +
+            '</div>' +
+        '</div>' +
+    '</div>'
     });
+    }
+    
+    
     console.log(resultElement)
     $('#movieResults').html(resultElement);
 }

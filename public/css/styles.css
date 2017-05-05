@@ -17,6 +17,19 @@ nav {
     margin-left: 10px;
 }
 
+/*movie card layout*/
+.card {
+    background-color: #ffffff;
+    box-shadow: 2px 2px 15px #888888;
+    height: auto;
+    margin-bottom: 40px;
+}
+
+.movieDetails {
+    padding: 20px;
+}
+
+
 
 /*carousel*/
 

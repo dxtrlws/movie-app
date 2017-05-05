@@ -32,6 +32,8 @@ router.post('/register', function(req, res) {
             errors: errors
         });
     } else {
+
+
         const newUser = new User({
             username: username,
             password: password
@@ -43,7 +45,6 @@ router.post('/register', function(req, res) {
         });
 
         req.flash('success_msg', 'You are registered and can now login');
-
         res.redirect('/users/login');
     }
 });
