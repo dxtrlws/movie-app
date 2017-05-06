@@ -1,10 +1,25 @@
 <div class="container">
-<h1>My Movies</h1>
-{{#each movies}}
-<section>
-     {{title}}
-     {{else}}
-     <p>Add some movies to your list by using the search</p>
-</section>
+    <h1>My Movies</h1>
+    {{#each movies}}
+        <div class="card">
+            <div class="row">
+                <div class="col-sm-3">
+                    <img class="img-responsive" src="{{imageURL}}">
+                </div>
+                <div class="col-sm-9">
+                    <div class="movieDetails">
+                        <p class="movieTitle"> {{title}}</p>
+                        <p class="moivieDate"><i class="fa fa-calendar" aria-hidden="true"></i> {{releaseDate}}</p>
+                        <p class="overview">{{overview}}</p>
+                        <div class="addMovie">
+                            <hr>
+                            <button class="btn btn-default removeMovie">Remove Movie</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <p>Add some movies to your list by using the search</p>
     {{/each}}
 </div>

@@ -53,8 +53,8 @@ router.delete('/:id', (req, res) => {
         .findByIdAndUpdate(id)
         .exec()
         .then(() => {
-            res.status(200);
-            // res.redirect('/mymovies');
+            req.flash('success_msg', 'Movie has been removed');
+            res.status(200).redirect('/mymovies');
         })
         .catch(err => {
             console.error(err);

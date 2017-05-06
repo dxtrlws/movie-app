@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise;
 const movieSchema = mongoose.Schema({
     title: String,
     imageURL: String,
-    releaseDate: Date,
+    releaseDate: String,
     overview: String,
     rating: String,
     _creator: {

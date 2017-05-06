@@ -6,8 +6,17 @@ nav {
     margin-top: 20px;
 }
 
-.item img {
-    max-height: 500px !important;
+
+/*Format search*/
+
+.fa-search {
+    position: relative;
+    top: 0px;
+    left: 30px;
+}
+
+#searchForm input[type=text] {
+    padding-left: 30px;
 }
 
 
@@ -17,7 +26,9 @@ nav {
     margin-left: 10px;
 }
 
+
 /*movie card layout*/
+
 .card {
     background-color: #ffffff;
     box-shadow: 2px 2px 15px #888888;
@@ -28,7 +39,6 @@ nav {
 .movieDetails {
     padding: 20px;
 }
-
 
 
 /*carousel*/
@@ -90,6 +100,17 @@ nav {
 
 .playing {
     margin-bottom: 20px;
+}
+
+
+/*Style movie results from search*/
+
+.movieTitle {
+    font-weight: bold;
+}
+
+#movieResults {
+    margin-top: 20px;
 }
 
 

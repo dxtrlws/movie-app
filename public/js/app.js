@@ -68,63 +68,88 @@ function getMovie(query, callback) {
         page: 1,
         include_adult: false
     };
-
-    console.log(settings);
     $.getJSON(movieSearchUrl, settings, callback);
 }
 
+//Display movie search results
 function displayMovieResults(data) {
     var resultElement = "";
-    if (data.results.length < 0) {
+    if (data.results.length <= 0) {
         resultElement = '<p>There are no movies that matched your query.</p>';
-    }else {
+    } else {
         $.each(data.results, function(key, result) {
-        var title = result.title;
-        var poster = result.poster_path;
-        var releaseDate = result.release_date;
-        var voteAverage = result.vote_average;
-        var overview = result.overview;
-        resultElement +=
-        '<div class="card">' +
-        '<div class="row">' +
-            '<div class="col-sm-3">' +
-                '<img class="img-responsive" src="http://image.tmdb.org/t/p/w342' + poster + '">' +
-            '</div>'+
-            '<div class="col-sm-9">' +
+            var title = result.title;
+            var poster = result.poster_path;
+            var releaseDate = moment(result.release_date).format('LL');
+            var voteAverage = result.vote_average;
+            var overview = result.overview;
+            var image = '';
+            if (poster === null) {
+                image = '/images/placeholder.jpg';
+            } else {
+                image = 'http://image.tmdb.org/t/p/w342' + poster;
+            }
+
+            resultElement +=
+                '<div class="card">' +
+                '<div class="row">' +
+                '<div class="col-sm-3">' +
+                '<img class="img-responsive" src="' + image + '">' +
+                '</div>' +
+                '<div class="col-sm-9">' +
                 '<div class="movieDetails">' +
-                '<p><b>' + title + '</b></p>' +
-                '<p><i class="fa fa-calendar" aria-hidden="true"></i> ' + releaseDate + '</p>' +
-                '<p>' + overview + '</p>' +
+                '<p class="movieTitle">' + title + '</p>' +
+                '<p class="movieDate"><i class="fa fa-calendar" aria-hidden="true"></i> ' + releaseDate + '</p>' +
+                '<p class="overview">' + overview + '</p>' +
                 '<div class="addMovie">' +
-                    '<hr>'+
-                    '<button class="btn btn-default" type="submit">Add Movie</button>' +
+                '<hr>' +
+                '<button type="submit" class="btn btn-default submitMovie">Add Movie</button>' +
+                '<a href="#"" class="submitMovie">Add Movie</a>' +
                 '</div>' +
                 '</div>' +
-            '</div>' +
-        '</div>' +
-    '</div>'
-    });
+                '</div>' +
+                '</div>' +
+                '</div>'
+        });
     }
-    
-    
-    console.log(resultElement)
     $('#movieResults').html(resultElement);
 }
 
+// Search for movies
 function searchForm() {
     $('#search').click(function(e) {
         e.preventDefault();
         var query = $('#movieSearch').val();
-        console.log(query);
         getMovie(query, displayMovieResults);
     });
 }
 
+// Add movie to database
 
-
+function addMovieToDB() {
+    $('#movieResults').on("click", "submitMovie", function(e) {
+        e.preventDefault();
+        var title = $('this').closest('.movieTitle').html();
+        var imageURL = $('this').closest('img').attr('src');
+        var releaseDate = $('this').closest('.releaseDate').text();
+        var overview = $('this').closest('.overview').text();
+        console.log(title);
+        console.log(imageURL);
+        console.log(releaseDate);
+        console.log(overview);
+    });
+    // $.post("/mymovies", {
+    //     title: title,
+    //     imageURL: imageURL,
+    //     releaseDate: releaseDate,
+    //     overview: overview
+    // });
+}
 
 
 $(function() {
     searchForm();
     getMovies(movieDiscoveryDisplay, upcomingMovieDisplay);
+    addMovieToDB();
+
 });
