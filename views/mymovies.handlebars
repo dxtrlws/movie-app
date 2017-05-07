@@ -1,7 +1,8 @@
 <div class="container">
     <h1>My Movies</h1>
+    <div id="movieResults">
     {{#each movies}}
-        <div class="card">
+        <div class="card" id="{{id}}">
             <div class="row">
                 <div class="col-sm-3">
                     <img class="img-responsive" src="{{imageURL}}">
@@ -22,4 +23,5 @@
         {{else}}
         <p>Add some movies to your list by using the search</p>
     {{/each}}
+    </div>
 </div>

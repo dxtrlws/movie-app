@@ -128,7 +128,9 @@ if (require.main === module) {
 app.use('/', routes);
 app.use('/users', users);
 app.use('/mymovies', movies);
-
+app.all('*', (req, res) => {
+    res.redirect('/');
+})
 
 module.exports = { runServer, closeServer };
 module.exports = app;

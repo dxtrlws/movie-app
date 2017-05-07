@@ -7,12 +7,20 @@ var movieSearchUrl = 'https://api.themoviedb.org/3/search/movie';
 var nowPlaying = 'https://api.themoviedb.org/3/movie/now_playing';
 var upcoming = 'https://api.themoviedb.org/3/movie/upcoming';
 
+// Movie API settings
+var settings = {
+    api_key: apiKey,
+    region: 'US',
+    adult: false,
+    // sort_by: release_date.desc
+}
+
 //Get movies
 function getMovies(movieDiscoveryDisplay, upcomingMovieDisplay) {
-    var settings = {
-        api_key: apiKey,
-        region: 'US'
-    };
+    // var settings = {
+    //     api_key: apiKey,
+    //     region: 'US'
+    // };
 
     $.getJSON(nowPlaying, settings, movieDiscoveryDisplay);
     $.getJSON(upcoming, settings, upcomingMovieDisplay);
@@ -39,25 +47,77 @@ function movieDiscoveryDisplay(data) {
     $('#nowPlaying').html(resultElement);
 }
 // Display 
+// function upcomingMovieDisplay(data) {
+//     var resultElement = '';
+//     $.each(data.results, function(key, result) {
+//         var movieID = result.id;
+//         var getMovieVideo = 'https://api.themoviedb.org/3/movie/' + movieID + '/videos?api_key='
+//         var key = '';
+//         var title = result.title;
+//         var poster = result.poster_path;
+//         var releaseDate = moment(result.release_date).format('LL');
+
+//         $.getJSON(getMovieVideo, settings, getMovieTrailer);
+
+//         function getMovieTrailer(data) {
+//             $.each(data.results, function(key, result) {
+//                 key = result.key;
+
+//             });
+//         }
+
+
+//         resultElement +=
+//             '<div class="col-md-2 playing">' +
+//             '<img class="img-responsive poster-image" src="http://image.tmdb.org/t/p/w342' + poster + '">' + '<br>' +
+//             '<b>' + title + '</b>' + '<br>' +
+//             'Release: ' + releaseDate + '<br>' +
+//             '<a data-fancybox="gallery" href="https://www.youtube.com/watch?v=' + key + '"><i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer </a>' +
+//             '</div>';
+//         return key < 5;
+//     });
+
+//     $('#upcoming').html(resultElement);
+// }
+
+
 function upcomingMovieDisplay(data) {
     var resultElement = '';
+
     $.each(data.results, function(key, result) {
+        var movieID = result.id;
+        var getMovieVideo = 'https://api.themoviedb.org/3/movie/' + movieID + '/videos';
         var title = result.title;
         var poster = result.poster_path;
         var releaseDate = moment(result.release_date).format('LL');
+
+        getMovieTrailer(getMovieVideo);
+
+        var movieKey = '';
+
         resultElement +=
             '<div class="col-md-2 playing">' +
             '<img class="img-responsive poster-image" src="http://image.tmdb.org/t/p/w342' + poster + '">' + '<br>' +
             '<b>' + title + '</b>' + '<br>' +
             'Release: ' + releaseDate + '<br>' +
-            '<i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer      <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Details' +
+            '<div class ="movieTrailer" id="' + movieID + '">' +
+            '<a data-fancybox="gallery" href="https://www.youtube.com/watch?v=' + movieKey + '"><i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer </a>' +
+            '</div>' +
             '</div>';
         return key < 5;
+
     });
 
     $('#upcoming').html(resultElement);
 }
 
+// // Get movie Trailer
+function getMovieTrailer(data) {
+    $.getJSON(data, settings, function(movie) {
+        console.log(movie.results[0].key);
+        return movie.results[0].key;
+    });
+}
 
 //Movie Search
 function getMovie(query, callback) {
@@ -104,7 +164,6 @@ function displayMovieResults(data) {
                 '<div class="addMovie">' +
                 '<hr>' +
                 '<button type="submit" class="btn btn-default submitMovie">Add Movie</button>' +
-                '<a href="#"" class="submitMovie">Add Movie</a>' +
                 '</div>' +
                 '</div>' +
                 '</div>' +
@@ -124,26 +183,51 @@ function searchForm() {
     });
 }
 
+
+
 // Add movie to database
 
 function addMovieToDB() {
-    $('#movieResults').on("click", "submitMovie", function(e) {
+    $('#movieResults').on("click", ".submitMovie", function(e) {
+
         e.preventDefault();
-        var title = $('this').closest('.movieTitle').html();
-        var imageURL = $('this').closest('img').attr('src');
-        var releaseDate = $('this').closest('.releaseDate').text();
-        var overview = $('this').closest('.overview').text();
-        console.log(title);
-        console.log(imageURL);
-        console.log(releaseDate);
-        console.log(overview);
+        var details = $(this).parent().parent().parent().parent();
+        var title = details.find('.movieTitle').text();
+        var imageURL = details.find('img').attr('src');
+        var releaseDate = details.find('.movieDate').text();
+        var overview = details.find('.overview').text();
+        var newMovie = { title: title, imageURL: imageURL, releaseDate: releaseDate, overview: overview };
+        $.ajax({
+                url: '/mymovies',
+                data: newMovie,
+                type: 'POST',
+                dataType: 'json',
+            })
+            .done(function(data) {
+                window.location.href = data.redirect;
+            });
     });
-    // $.post("/mymovies", {
-    //     title: title,
-    //     imageURL: imageURL,
-    //     releaseDate: releaseDate,
-    //     overview: overview
-    // });
+}
+
+// Remove move from database
+
+function removeMovieToDB() {
+    $('.removeMovie').click(function() {
+        var id = $(this).closest('.card').attr('id');
+        console.log(id);
+        // var deleteMovie = { id: deleteMovie };
+
+        $.ajax({
+                url: '/mymovies/' + id,
+                data: id,
+                type: 'DELETE',
+                // dataType: 'json'
+            })
+            .done(function(data) {
+                window.location.href = data.redirect;
+            });
+    });
+
 }
 
 
@@ -151,5 +235,5 @@ $(function() {
     searchForm();
     getMovies(movieDiscoveryDisplay, upcomingMovieDisplay);
     addMovieToDB();
-
+    removeMovieToDB()
 });

@@ -8,7 +8,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 // Get movies
-router.get('/', (req, res) => {
+router.get('/', ensureAuthenticated, (req, res) => {
     Movie
         .find({ _creator: req.user.id })
         .exec()
@@ -27,7 +27,6 @@ router.get('/', (req, res) => {
 // Add movie
 router.post('/', jsonParser, (req, res) => {
     console.log({ _id: req.user.id });
-
     const newMovie = Movie.create({
             title: req.body.title,
             imageURL: req.body.imageURL,
@@ -37,24 +36,25 @@ router.post('/', jsonParser, (req, res) => {
             _creator: { _id: req.user.id }
         })
         .then(() => {
-            res.status(200).json(newMovie);
-            // res.redirect('/mymovies');
+            req.flash('success_msg', 'Your movie has been added');
+            res.send({ redirect: '/mymovies' });
         })
         .catch((err) => {
             console.error(err);
             res.status(500).json({ message: 'Something went wrong' });
         });
+
 });
 
 // delete movie
 router.delete('/:id', (req, res) => {
-    const id = req.body.id;
+
     Movie
-        .findByIdAndUpdate(id)
+        .findByIdAndRemove(req.params.id)
         .exec()
         .then(() => {
             req.flash('success_msg', 'Movie has been removed');
-            res.status(200).redirect('/mymovies');
+            res.status(200).send({ redirect: '/mymovies' });
         })
         .catch(err => {
             console.error(err);

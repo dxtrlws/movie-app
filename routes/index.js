@@ -13,6 +13,8 @@ router.get('/search', ensureAuthenticated, (req, res) => {
     res.render('search', { title: 'Movie Watch - Search' });
 });
 
+
+
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
