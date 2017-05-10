@@ -39,7 +39,6 @@ function movieDiscoveryDisplay(data) {
             '</div>';
         return key < 5;
     });
-
     $('#nowPlaying').html(resultElement);
 }
 
@@ -54,14 +53,13 @@ function upcomingMovieDisplay(data) {
         var poster = result.poster_path;
         var releaseDate = moment(result.release_date).format('LL');
         var movieKey = '';
-
         resultElement +=
             '<div class="col-md-2 playing">' +
             '<img class="img-responsive poster-image" src="http://image.tmdb.org/t/p/w342' + poster + '">' + '<br>' +
             '<b>' + title + '</b>' + '<br>' +
             'Release: ' + releaseDate + '<br>' +
             '<div class ="movieTrailer" id="' + movieID + '">' +
-            '<a href="#"><i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer</a>' +
+            '<a href="javascript:;"><i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer</a>' +
             '</div>' +
             '</div>';
         return key < 5;
@@ -72,25 +70,14 @@ function upcomingMovieDisplay(data) {
 
 // // Get movie Trailer
 function getMovieTrailer() {
-
     $('#upcoming, #nowPlaying').on('click', 'div .movieTrailer', function(e) {
         e.preventDefault();
         var movieID = $(this).attr('id');
-        console.log(movieID);
         var getMovieVideo = 'https://api.themoviedb.org/3/movie/' + movieID + '/videos';
-        console.log(getMovieVideo);
         $.getJSON(getMovieVideo, settings, function(movie) {
             var movieKey = movie.results[0].key;
-            var Href = 'https://www.youtube.com/watch?v=' + movieKey;
-            console.log(Href);
-            console.log(movieKey);
-            // $.fancybox.open({
-            //     href: Href,
-            //     type: 'iframe'
-            // });
-
-            $.fancybox.open('<iframe width="1280" height="720" src="https://www.youtube.com/embed/' + movieKey + '?autoplay=1&rel=0" frameborder="0" allowfullscreen></iframe>')
-
+            var youTube = lity('https://www.youtube.com/watch?v=' + movieKey);
+            youTube.open();
         });
 
     });
