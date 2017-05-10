@@ -21,7 +21,6 @@ function getMovies(movieDiscoveryDisplay, upcomingMovieDisplay) {
 }
 
 function movieDiscoveryDisplay(data) {
-
     var resultElement = '';
     $.each(data.results, function(key, result) {
         var movieID = result.id;
@@ -45,10 +44,8 @@ function movieDiscoveryDisplay(data) {
 // Display upcoming movies
 function upcomingMovieDisplay(data) {
     var resultElement = '';
-
     $.each(data.results, function(key, result) {
         var movieID = result.id;
-
         var title = result.title;
         var poster = result.poster_path;
         var releaseDate = moment(result.release_date).format('LL');
@@ -59,7 +56,7 @@ function upcomingMovieDisplay(data) {
             '<b>' + title + '</b>' + '<br>' +
             'Release: ' + releaseDate + '<br>' +
             '<div class ="movieTrailer" id="' + movieID + '">' +
-            '<a href="javascript:;"><i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer</a>' +
+            '<a href="#"><i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer</a>' +
             '</div>' +
             '</div>';
         return key < 5;
@@ -79,9 +76,7 @@ function getMovieTrailer() {
             var youTube = lity('https://www.youtube.com/watch?v=' + movieKey);
             youTube.open();
         });
-
     });
-
 }
 
 //Movie Search
@@ -148,12 +143,9 @@ function searchForm() {
     });
 }
 
-
-
 // Add movie to database
 function addMovieToDB() {
     $('#movieResults').on("click", ".submitMovie", function(e) {
-
         e.preventDefault();
         var details = $(this).parent().parent().parent().parent();
         var title = details.find('.movieTitle').text();
