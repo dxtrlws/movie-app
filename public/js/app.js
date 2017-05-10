@@ -173,7 +173,6 @@ function removeMovieToDB() {
                 url: '/mymovies/' + id,
                 data: id,
                 type: 'DELETE',
-                // dataType: 'json'
             })
             .done(function(data) {
                 window.location.href = data.redirect;
