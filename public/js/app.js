@@ -12,25 +12,19 @@ var settings = {
     api_key: apiKey,
     region: 'US',
     adult: false,
-    // sort_by: release_date.desc
 }
 
 //Get movies
 function getMovies(movieDiscoveryDisplay, upcomingMovieDisplay) {
-    // var settings = {
-    //     api_key: apiKey,
-    //     region: 'US'
-    // };
-
     $.getJSON(nowPlaying, settings, movieDiscoveryDisplay);
     $.getJSON(upcoming, settings, upcomingMovieDisplay);
-
 }
 
 function movieDiscoveryDisplay(data) {
 
     var resultElement = '';
     $.each(data.results, function(key, result) {
+        var movieID = result.id;
         var title = result.title;
         var poster = result.poster_path;
         var releaseDate = moment(result.release_date).format('LL');
@@ -39,60 +33,26 @@ function movieDiscoveryDisplay(data) {
             '<img class="img-responsive poster-image" src="http://image.tmdb.org/t/p/w342' + poster + '">' + '<br>' +
             '<b>' + title + '</b>' + '<br>' +
             'Release: ' + releaseDate + '<br>' +
-            '<i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer      <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Details' +
+            '<div class ="movieTrailer" id="' + movieID + '">' +
+            '<a href="#"><i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer</a>' +
+            '</div>' +
             '</div>';
         return key < 5;
     });
 
     $('#nowPlaying').html(resultElement);
 }
-// Display 
-// function upcomingMovieDisplay(data) {
-//     var resultElement = '';
-//     $.each(data.results, function(key, result) {
-//         var movieID = result.id;
-//         var getMovieVideo = 'https://api.themoviedb.org/3/movie/' + movieID + '/videos?api_key='
-//         var key = '';
-//         var title = result.title;
-//         var poster = result.poster_path;
-//         var releaseDate = moment(result.release_date).format('LL');
 
-//         $.getJSON(getMovieVideo, settings, getMovieTrailer);
-
-//         function getMovieTrailer(data) {
-//             $.each(data.results, function(key, result) {
-//                 key = result.key;
-
-//             });
-//         }
-
-
-//         resultElement +=
-//             '<div class="col-md-2 playing">' +
-//             '<img class="img-responsive poster-image" src="http://image.tmdb.org/t/p/w342' + poster + '">' + '<br>' +
-//             '<b>' + title + '</b>' + '<br>' +
-//             'Release: ' + releaseDate + '<br>' +
-//             '<a data-fancybox="gallery" href="https://www.youtube.com/watch?v=' + key + '"><i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer </a>' +
-//             '</div>';
-//         return key < 5;
-//     });
-
-//     $('#upcoming').html(resultElement);
-// }
-
-
+// Display upcoming movies
 function upcomingMovieDisplay(data) {
     var resultElement = '';
 
     $.each(data.results, function(key, result) {
         var movieID = result.id;
-        var getMovieVideo = 'https://api.themoviedb.org/3/movie/' + movieID + '/videos';
+
         var title = result.title;
         var poster = result.poster_path;
         var releaseDate = moment(result.release_date).format('LL');
-
-        getMovieTrailer(getMovieVideo);
-
         var movieKey = '';
 
         resultElement +=
@@ -101,22 +61,40 @@ function upcomingMovieDisplay(data) {
             '<b>' + title + '</b>' + '<br>' +
             'Release: ' + releaseDate + '<br>' +
             '<div class ="movieTrailer" id="' + movieID + '">' +
-            '<a data-fancybox="gallery" href="https://www.youtube.com/watch?v=' + movieKey + '"><i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer </a>' +
+            '<a href="#"><i class="fa fa-play-circle" aria-hidden="true"></i> Play Trailer</a>' +
             '</div>' +
             '</div>';
         return key < 5;
-
     });
 
     $('#upcoming').html(resultElement);
 }
 
 // // Get movie Trailer
-function getMovieTrailer(data) {
-    $.getJSON(data, settings, function(movie) {
-        console.log(movie.results[0].key);
-        return movie.results[0].key;
+function getMovieTrailer() {
+
+    $('#upcoming, #nowPlaying').on('click', 'div .movieTrailer', function(e) {
+        e.preventDefault();
+        var movieID = $(this).attr('id');
+        console.log(movieID);
+        var getMovieVideo = 'https://api.themoviedb.org/3/movie/' + movieID + '/videos';
+        console.log(getMovieVideo);
+        $.getJSON(getMovieVideo, settings, function(movie) {
+            var movieKey = movie.results[0].key;
+            var Href = 'https://www.youtube.com/watch?v=' + movieKey;
+            console.log(Href);
+            console.log(movieKey);
+            // $.fancybox.open({
+            //     href: Href,
+            //     type: 'iframe'
+            // });
+
+            $.fancybox.open('<iframe width="1280" height="720" src="https://www.youtube.com/embed/' + movieKey + '?autoplay=1&rel=0" frameborder="0" allowfullscreen></iframe>')
+
+        });
+
     });
+
 }
 
 //Movie Search
@@ -186,7 +164,6 @@ function searchForm() {
 
 
 // Add movie to database
-
 function addMovieToDB() {
     $('#movieResults').on("click", ".submitMovie", function(e) {
 
@@ -210,13 +187,9 @@ function addMovieToDB() {
 }
 
 // Remove move from database
-
 function removeMovieToDB() {
     $('.removeMovie').click(function() {
         var id = $(this).closest('.card').attr('id');
-        console.log(id);
-        // var deleteMovie = { id: deleteMovie };
-
         $.ajax({
                 url: '/mymovies/' + id,
                 data: id,
@@ -235,5 +208,6 @@ $(function() {
     searchForm();
     getMovies(movieDiscoveryDisplay, upcomingMovieDisplay);
     addMovieToDB();
-    removeMovieToDB()
+    removeMovieToDB();
+    getMovieTrailer()
 });
