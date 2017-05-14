@@ -181,6 +181,22 @@ function removeMovieToDB() {
 
 }
 
+// Mark movie as watched
+function markMovieWatched() {
+    $('.markedWatched').click(function() {
+        var id = $(this).closest('.card').attr('id');
+        $.ajax({
+                url: '/mymovies/' + id,
+                data: id,
+                type: 'PUT',
+            })
+            .done(function(data) {
+                window.location.href = data.redirect;
+            });
+    });
+
+}
+
 
 $(function() {
     searchForm();
@@ -188,4 +204,5 @@ $(function() {
     addMovieToDB();
     removeMovieToDB();
     getMovieTrailer()
+    markMovieWatched()
 });

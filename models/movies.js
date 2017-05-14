@@ -8,6 +8,8 @@ const movieSchema = mongoose.Schema({
     releaseDate: String,
     overview: String,
     rating: String,
+    watchStatus: { type: Boolean, required: true, default: false },
+    createdAt: { type: Date, required: true, default: Date.now },
     _creator: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'

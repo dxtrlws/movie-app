@@ -10,11 +10,30 @@ const LocalStrategy = require('passport-local').Strategy;
 // Get movies
 router.get('/', ensureAuthenticated, (req, res) => {
     Movie
-        .find({ _creator: req.user.id })
+        .find({ _creator: req.user.id, watchStatus: false })
+        .sort({ createdAt: 'desc' })
         .exec()
         .then((movies) => {
             // return res.status(200).json(movies);
             res.render('mymovies', { movies, title: 'My Movies' });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({ message: 'Unable to find movies' })
+        })
+
+
+});
+
+// Get watched movies
+router.get('/watchedMovies', ensureAuthenticated, (req, res) => {
+    Movie
+        .find({ _creator: req.user.id, watchStatus: true })
+        .sort({ createdAt: 'desc' })
+        .exec()
+        .then((movies) => {
+            // return res.status(200).json(movies);
+            res.render('watchedMovies', { movies, title: 'My watched Movies' });
         })
         .catch((err) => {
             console.error(err);
@@ -48,9 +67,23 @@ router.post('/', jsonParser, (req, res) => {
 
 // delete movie
 router.delete('/:id', (req, res) => {
-
     Movie
         .findByIdAndRemove(req.params.id)
+        .exec()
+        .then(() => {
+            req.flash('success_msg', 'Movie has been removed');
+            res.status(200).send({ redirect: '/mymovies' });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Something went wrong' });
+        });
+});
+
+// Update Movie
+router.put('/:id', (req, res) => {
+    Movie
+        .findByIdAndUpdate(req.params.id, { watchStatus: true })
         .exec()
         .then(() => {
             req.flash('success_msg', 'Movie has been removed');

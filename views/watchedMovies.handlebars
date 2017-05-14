@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>My Movies</h1>
+    <h1>My Watched Movies</h1>
     <div id="movieResults">
     {{#each movies}}
         <div class="card" id="{{id}}">
@@ -15,14 +15,14 @@
                         <div class="addMovie">
                             <hr>
                             <button class="btn btn-default removeMovie">Remove Movie</button>
-                            <button class="btn btn-default markedWatched">Mark as Watched</button>
+                           
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         {{else}}
-        <p>Add some movies to your list by using the search</p>
+        <p>You haven't watched any movies yet</p>
     {{/each}}
     </div>
 </div>

@@ -49,6 +49,8 @@ router.post('/register', function(req, res) {
     }
 });
 
+//update user
+
 passport.use(new LocalStrategy(
     function(username, password, done) {
         User.getUserByUsername(username, (err, user) => {

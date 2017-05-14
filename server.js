@@ -10,6 +10,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongo = require('mongodb');
+const morgan = require('morgan')
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const { PORT, DATABASE_URL } = require('./config');
@@ -23,6 +24,8 @@ const routes = require('./routes/index');
 const users = require('./routes/users');
 const movies = require('./routes/movies');
 
+// use morgan
+app.use(morgan('common'));
 
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
@@ -132,5 +135,5 @@ app.all('*', (req, res) => {
     res.redirect('/');
 })
 
-module.exports = { runServer, closeServer };
-module.exports = app;
+module.exports = { app, runServer, closeServer };
+// module.exports = app;
