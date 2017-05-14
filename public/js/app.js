@@ -1,6 +1,3 @@
-/**
- * Created by Admin on 4/21/2017.
- */
 'use strict'
 var apiKey = 'd488882c9d53c805e558e55986d4dd20';
 var movieSearchUrl = 'https://api.themoviedb.org/3/search/movie';

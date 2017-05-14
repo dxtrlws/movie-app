@@ -32,15 +32,12 @@ router.get('/watchedMovies', ensureAuthenticated, (req, res) => {
         .sort({ createdAt: 'desc' })
         .exec()
         .then((movies) => {
-            // return res.status(200).json(movies);
             res.render('watchedMovies', { movies, title: 'My watched Movies' });
         })
         .catch((err) => {
             console.error(err);
             res.status(500).json({ message: 'Unable to find movies' })
         })
-
-
 });
 
 // Add movie

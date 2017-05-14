@@ -7,6 +7,12 @@ chai.use(chaiHttp);
 
 
 describe('Movie app', function() {
+    before(function() {
+        return runServer();
+    });
+    after(function() {
+        return closeServer();
+    });
     it('Should return status of 200 on homepage', function() {
         return chai.request(app)
             .get('/')
