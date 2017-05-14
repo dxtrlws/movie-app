@@ -1,4 +1,5 @@
 
+![Movie watch screenshot](https://github.com/dxtrlws/movie-app/blob/master/MovieWatchSN.jpg)
 ## Overview
 The goal of this app is to allow users to discover and keep track of movies they want to watch. They can add search for movies and then add to them to their list to revisit later. Once they've watched a movie on their list, they can mark the movie asl "watched" or remove it from their list entirely.
 
