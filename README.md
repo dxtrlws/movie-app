@@ -5,7 +5,7 @@ The goal of this app is to allow users to discover and keep track of movies they
 ## Live Prototype
 The live site can be seen at: [https://stormy-reaches-29948.herokuapp.com/](https://stormy-reaches-29948.herokuapp.com/)
 
-# Functionality
+## Functionality
 * Displays current and upcomming movies that are in theaters.
 * Play movie trailers for current and upcomming movies that are in theaters.
 * Dispalys rich movie posters.
