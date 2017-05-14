@@ -10,6 +10,7 @@ The live site can be seen at: [https://stormy-reaches-29948.herokuapp.com/](http
 * Play movie trailers for current and upcomming movies that are in theaters.
 * Dispalys rich movie posters.
 * Ability to search for movies you want to keep track of.
+* Ability to add searched movies to a list.
 * Implemented with clean design principles.
 
 ## Technical
@@ -20,4 +21,8 @@ The live site can be seen at: [https://stormy-reaches-29948.herokuapp.com/](http
 * Continuous integration using Travis CI was used during development.
 * The app is hosted on Heroku and the database is hosted on mLab.
 
+## Development Roadmap
+* Display more movie details on searched movies.
+* Show releated movies on movie details page.
+* Integrate global search bar.
 
