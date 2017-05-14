@@ -86,7 +86,7 @@ router.put('/:id', (req, res) => {
         .findByIdAndUpdate(req.params.id, { watchStatus: true })
         .exec()
         .then(() => {
-            req.flash('success_msg', 'Movie has been removed');
+            req.flash('success_msg', 'Movie has been added to watach list');
             res.status(200).send({ redirect: '/mymovies' });
         })
         .catch(err => {
