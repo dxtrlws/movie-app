@@ -14,7 +14,7 @@ The live site can be seen at: [https://stormy-reaches-29948.herokuapp.com/](http
 * Implemented with clean design principles.
 
 ## Technical
-* This app is built with Node.js, JavaScript, HTML and CSS as well as some help libraries such as moment.js for formatting time and lity.js for lightboxes.
+* This app is built with Node.js, MongoDB, JavaScript, HTML and CSS as well as some help libraries such as moment.js for formatting time and lity.js for lightboxes.
 * Tests were completed using Mocha and all test were passed before deploying into production.
 * The app uses [The Movie Database](https://www.themoviedb.org/) API to display movie posters and details.
 * The front is fully responsive.
