@@ -10,7 +10,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongo = require('mongodb');
-const morgan = require('morgan')
+const morgan = require('morgan');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const { PORT, DATABASE_URL } = require('./config');
@@ -124,7 +124,7 @@ function closeServer() {
 
 if (require.main === module) {
     runServer().catch(err => console.error(err));
-};
+}
 
 
 // Set Routes
@@ -133,7 +133,7 @@ app.use('/users', users);
 app.use('/mymovies', movies);
 app.all('*', (req, res) => {
     res.redirect('/');
-})
+});
 
 module.exports = { app, runServer, closeServer };
 // module.exports = app;
