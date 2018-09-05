@@ -4,6 +4,8 @@ const should = chai.should();
 const faker = require('faker');
 const { app, runServer, closeServer } = require('../server');
 chai.use(chaiHttp);
+const expect = require('chai').expect;
+const request = require('supertest');
 
 
 describe('Movie app', function() {
@@ -34,5 +36,11 @@ describe('Movie app', function() {
                 res.should.have.status(200);
             });
     });
-
+    it('should return to the homepage if not logged in', function() {
+        return chai.request(app)
+            .get('/mymovies')
+            .then(function(res){
+                res.should.have.status(200);
+            });
+    });
 });
