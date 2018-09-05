@@ -19,8 +19,8 @@ router.get('/', ensureAuthenticated, (req, res) => {
         })
         .catch((err) => {
             console.error(err);
-            res.status(500).json({ message: 'Unable to find movies' })
-        })
+            res.status(500).json({ message: 'Unable to find movies' });
+        });
 
 
 });
@@ -36,8 +36,8 @@ router.get('/watchedMovies', ensureAuthenticated, (req, res) => {
         })
         .catch((err) => {
             console.error(err);
-            res.status(500).json({ message: 'Unable to find movies' })
-        })
+            res.status(500).json({ message: 'Unable to find movies' });
+        });
 });
 
 // Add movie
